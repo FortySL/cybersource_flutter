@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navigation Delegate Example</title>
+</head>
+
+<body>
+    <p>
+        The navigation delegate is set to block navigation to the youtube website.
+    </p>
+    <iframe id="cardinal_collection_iframe" name="collectionIframe" height="10" width="10"
+        style="display: none;"></iframe>
+    <form id="cardinal_collection_form" method="POST" target="collectionIframe"
+        action=https://centinelapistag.cardinalcommerce.com/V1/Cruise/Collect>
+        <input id="cardinal_collection_form_input" type="hidden" name="JWT"
+            value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2Y2Y1NTZkZC1hOWM2LTRmMjAtYTliZi01OTVhODhjMTM2Y2QiLCJpYXQiOjE2OTE2MzE5ODYsImlzcyI6IjVkZDgzYmYwMGU0MjNkMTQ5OGRjYmFjYSIsImV4cCI6MTY5MTYzNTU4NiwiT3JnVW5pdElkIjoiNjMyODIyMjA2YjY5Yjg0YWE2ZTRjMTdlIiwiUmVmZXJlbmNlSWQiOiI1MjA3MzgwYy1hMTE0LTRhZGItODczMi01ZDVlNjk3OGVjNjIifQ.1zMQakjdlNL_PpZAwaVzh_sSoJJ1hYKS2jaI-h0SgxY">
+    </form>
+</body>
+
+</html>
+
+<script>
+    window.onload = function () {
+        var cardinalCollectionForm = document.querySelector('#cardinal_collection_form');
+        if (cardinalCollectionForm) {
+            cardinalCollectionForm.submit();
+            JSChannel.postMessage("JSChannel: sent");
+        } // form exists 
+    };
+
+    window.addEventListener("message", function (event) {
+        if (event.origin === "https://centinelapistag.cardinalcommerce.com") {
+            JSChannel.postMessage("JSChannel: received");
+            JSChannel2.postMessage(event.data);
+        }
+    }, false);
+</script>
